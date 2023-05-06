@@ -1,0 +1,195 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alien Arithmetic | Alien Approach</title>
+  </head>
+  <body>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .game-box {
+        /* Styles the box*/
+        border: 1px solid black;
+        width: 90vh;
+        height: 90vh;
+        margin-left: 50vw;
+        margin-top: 5vh;
+        transform: translateX(-50%);
+      }
+
+      a,
+      p,
+      h1,
+      h2,
+      h3,
+      ol,
+      li,
+      ul {
+        /* Defaults the styles of tags */
+        padding: 0;
+        margin: 0;
+      }
+      #main {
+        margin: 0 auto;
+        text-align: center;
+        width: 70%;
+      }
+      #title {
+        margin-top: 20vh;
+      }
+
+      #your-score {
+        /*Styles the score just achieved*/
+        margin-top: 10px;
+      }
+      button.type {
+        /*Styles the game mode buttons*/
+        border: 2px solid white;
+        background-color: #ffffff;
+        padding: 5px 10px;
+      }
+      button:hover {
+        background-color: #d7d7d7;
+      }
+
+      .types {
+        /*Styles the box containing the score board*/
+        margin: 20px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      li {
+        /*Styles the score items  */
+        margin: 5px auto;
+        width: 50%;
+      }
+      ol {
+        text-align: center;
+      }
+      .action {
+        /*Styles the restart and exit buttons  */
+        border: 2px solid blue;
+        background-color: white;
+        margin-top: 20px;
+        padding: 5px 10px;
+      }
+    </style>
+    <div class="game-box" id="game-box">
+      <div id="main">
+        <h1 id="title">High Scores</h1>
+        <!-- This h3 tag shows the score just achieved -->
+        <h3 id="your-score"></h3>
+        <!-- This div tag contains the score board-->
+        <div class="types">
+          <!-- These buttons allow the user to choose which
+            game mode scores they want to see  -->
+          <button class="type both" onclick="getScores('Both')">Both</button>
+          <button class="type as" onclick="getScores('typeAS')">
+            Addition and Subtraction
+          </button>
+          <button class="type md" onclick="getScores('typeMD')">
+            Multiplication and Division
+          </button>
+        </div>
+        <ol id="scores"></ol>
+        <!-- This button takes the user to the game menu page -->
+        <button class="action restart" onclick="nextLocation('game-menu')">
+          Restart
+        </button>
+        <!-- This button takes the user to the games page -->
+        <button class="action exit" onclick="nextLocation('')">Exit</button>
+      </div>
+    </div>
+    <script>
+      //Gets the score and game mode from the session storage
+      const currentType = sessionStorage.getItem("type");
+      const score = sessionStorage.getItem("score");
+
+      const yourScore = document.getElementById("your-score");
+      yourScore.innerText = `Your Score: ${score}`;
+
+      const selectedTypes = document.querySelectorAll(".type");
+      selectedTypes.forEach((ele) => {
+        //For each score board button selected, do the following
+        ele.addEventListener("click", (res) => {
+          selectedTypes.forEach((e) => {
+            //When the button is clicked make all
+            //the buttons have white borders
+            e.style.borderColor = "white";
+          });
+          //The button clicked will get a red border
+          ele.style.borderColor = "red";
+        });
+      });
+
+      //Depending on the game mode previously played
+      //the corresponding score board button is highlighted and displayed
+      if (currentType === "both") {
+        document.querySelector(".both").style.borderColor = "red";
+        getScores("Both");
+      } else if (currentType === "as") {
+        document.querySelector(".as").style.borderColor = "red";
+        getScores("typeAS");
+      } else {
+        document.querySelector(".md").style.borderColor = "red";
+        getScores("typeMD");
+      }
+
+      function nextLocation(loc) {
+        //Calls an endpoint when called
+        location.href = "http://localhost:3000/games/" + loc;
+      }
+
+      function displayScores(array) {
+        //Displays the scores in the DOM
+        const list = document.getElementById("scores");
+        // Sorts the array
+        array = array.sort(function (a, b) {
+          return b - a;
+        });
+        if (!array.length) {
+          //If the array given is empty add the p tag below
+          //to the list of scores
+          list.innerHTML = "<p>There are no scores here</p>";
+        } else {
+          //If the array given is not empty add the array
+          //into the DOM
+          list.innerHTML = "";
+          for (let i = 0; i < array.length; i++) {
+            if (i >= 10) {
+              //This only allows the first top ten
+              //scores to be displayed
+              break;
+            }
+            list.innerHTML += `<li>${array[i]}</li>`;
+          }
+        }
+      }
+
+      function getScores(type) {
+        //Sends a POST request to the server in order to get the array of scores
+        fetch("http://localhost:3000/games/game-score", {
+          method: "POST",
+          body: JSON.stringify({
+            type: type,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            displayScores(data.message);
+          });
+      }
+    </script>
+  </body>
+</html>

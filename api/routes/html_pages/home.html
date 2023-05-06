@@ -1,0 +1,85 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="http://localhost:3000/styles/styles.css" />
+    <title>Alien Arithmetic | Home</title>
+  </head>
+  <body>
+    <style>
+      .main {
+        /* Styles the container to
+        arrange the other element on the 
+        screen*/
+        margin: 5vh auto;
+        padding: 5vh;
+        padding-top: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .block {
+        /* Styles the class block div tags*/
+        width: 30%;
+        max-height: 5%;
+        padding: 15px;
+        box-shadow: 3px 5px 10px rgb(163, 163, 163);
+      }
+
+      .descr {
+        margin-top: 20px;
+      }
+      .home-link {
+        /* Turn the link tags orange to indicate they
+        are clickable*/
+        color: orange;
+        cursor: pointer;
+      }
+      .home-link:hover {
+        /* The links when hovered over, decrease in opacity*/
+        opacity: 0.75;
+      }
+    </style>
+    <nav class="nav-bar">
+      <ul class="nav-links">
+        <li class="logo"><a href="/home">Alien Arithmetic</a></li>
+        <li><a href="/games">Games</a></li>
+        <li><a href="/stats">Statistics</a></li>
+        <li><a href="/pfp">Profile</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <div class="block game">
+        <!-- Container holding the link to the Games page
+        also with a short description -->
+        <h2>Games</h2>
+        <p class="descr">
+          <a href="/games" class="home-link"
+            >Play the challenging and enjoyablde games here!</a
+          >
+        </p>
+      </div>
+      <div class="block stats">
+        <!-- Container holding the link to the Stats page
+        also with a short description -->
+        <h2>Statistics</h2>
+        <p class="descr">
+          <a href="/stats" class="home-link"
+            >Have a look at your progress over time!</a
+          >
+        </p>
+      </div>
+      <div class="block pfp">
+        <!-- Container holding the link to the Profile page
+        also with a short description -->
+        <h2>Profile</h2>
+        <p class="descr">
+          <a href="/pfp" class="home-link"
+            >Presonalize your profile that other users can see!</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

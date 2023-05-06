@@ -1,0 +1,153 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alien Arithmetic | Statistics</title>
+    <link rel="stylesheet" href="http://localhost:3000/styles/styles.css" />
+  </head>
+  <body>
+    <style>
+      .main {
+        /* Styles the container to align all the 
+        children elements */
+        margin: 0 auto;
+        padding: 15vh;
+        padding-top: 5vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .block {
+        /* Styles the container to contain the graph 
+        and everything else*/
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 3px 5px 10px rgb(163, 163, 163);
+      }
+      .graph {
+        /* Styles the graph*/
+        margin-top: 10px;
+        width: 100%;
+        color: rgb(255, 165, 0);
+        height: 100%;
+        max-height: 300px;
+      }
+      .container {
+        /* This aligns the graphs to the center*/
+        display: flex;
+        align-items: center;
+        width: 90%;
+      }
+      .y-axis {
+        /* Styles the y axis */
+        transform-origin: 50%;
+        transform: rotate(-90deg);
+      }
+      .attempt {
+        /* Styles the x axis*/
+        text-align: center;
+      }
+    </style>
+    <nav class="nav-bar">
+      <ul class="nav-links">
+        <li class="logo"><a href="/home">Alien Arithmetic</a></li>
+        <li><a href="/games">Games</a></li>
+        <li><a href="/stats">Statistics</a></li>
+        <li><a href="/pfp">Profile</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <!-- Creates the div to hold everything -->
+      <div class="block">
+        <h2>Both</h2>
+        <!-- Creates the container to hold the graph -->
+        <div class="container">
+          <!-- y axis label-->
+          <p class="y-axis">Score</p>
+          <!-- This is where the graph is displayed -->
+          <canvas id="Both" class="graph"></canvas>
+        </div>
+        <br />
+        <div class="attempt">
+          <!-- x axis label -->
+          <p class="x-axis">Attempt Number</p>
+        </div>
+      </div>
+      <!-- All the comments above apply exactly below -->
+      <div class="block">
+        <h2>Multiplication and Division</h2>
+        <div class="container">
+          <p class="y-axis">Score</p>
+          <canvas id="MD" class="graph"></canvas>
+        </div>
+        <br />
+        <div class="attempt">
+          <p class="x-axis">Attempt Number</p>
+        </div>
+      </div>
+      <div class="block">
+        <h2>Addition and Subtraction</h2>
+        <div class="container">
+          <p class="y-axis">Score</p>
+          <canvas id="AS" class="graph"></canvas>
+        </div>
+        <br />
+        <div class="attempt">
+          <p class="x-axis">Attempt Number</p>
+        </div>
+      </div>
+    </div>
+    <!-- Imports the graph libary -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+    <script>
+      //Sends a GET request to the server in order to get back the scores for the user
+      fetch("http://localhost:3000/stats/game-scores")
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          const content = data.message;
+          //Displays the data
+          makeChart(content.typeBoth, "Both", "Both types");
+          makeChart(content.typeMD, "MD", "Multiplication and Division Data");
+          makeChart(content.typeAS, "AS", "Addition and Subtraction Data");
+        });
+
+      function makeChart(data, canvas, title) {
+        //Creates a graph with the given data and title
+        //in the specified canvas
+        let xValues = [];
+        if (data[0] !== 0) {
+          //Adds 0 to the front of the data if 0 is not already present
+          data.unshift(0);
+        }
+        const yValues = data;
+        for (let i = 0; i < yValues.length; i++) {
+          //Makes the xValues list
+          xValues.push(i);
+        }
+
+        const chart = new Chart(canvas, {
+          //Creates the chart
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [
+              {
+                //Styles the chart and inputs the data
+                label: title,
+                pointRadius: 4,
+                pointBackgroundColor: "rgb(255, 165, 0)",
+                backgroundColor: "rgb(50 216 223)",
+                borderColor: "rgb(50 216 223)",
+                data: yValues,
+              },
+            ],
+          },
+        });
+      }
+    </script>
+  </body>
+</html>

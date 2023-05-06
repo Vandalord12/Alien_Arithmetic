@@ -1,0 +1,66 @@
+/*Imports a font family from google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  /* This applies sets the default value for the
+  font, cursor and color on all the web pages */
+  font-family: "Josefin Sans", serif;
+  cursor: default;
+  color: rgb(66, 66, 66);
+  margin: 0;
+  padding: 0;
+}
+
+a,
+ul,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* This defaults all the tags above
+  so they are easier to work with*/
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+nav.nav-bar {
+  /* This styles th nav bar body. The children of
+  this container are centered on the y axis */
+  padding: 20px 0px 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(50 216 223);
+  box-shadow: 0 -7px 20px 0 rgba(0, 0, 0, 0.75);
+}
+
+ul.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li {
+  list-style-type: none;
+  margin-left: 20px;
+  cursor: pointer;
+}
+li:hover {
+  /* When hovering over the links, the opacity
+  decreases */
+  opacity: 0.75;
+}
+
+.nav-links a {
+  color: white;
+}
+
+li.logo {
+  font-size: 2em;
+}

@@ -1,0 +1,75 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="http://localhost:3000/styles/styles.css" />
+    <title>Alien Arithmetic | Games</title>
+  </head>
+  <body>
+    <style>
+      .main {
+        margin: 0 auto;
+        padding: 15vh;
+        padding-top: 5vh;
+      }
+      .game-list {
+        /* Styles the container holding the list of games*/
+        margin: 20px 0;
+        margin-left: 10px;
+        padding: 20px;
+        width: 50vw;
+        box-shadow: 3px 5px 10px rgb(163, 163, 163);
+      }
+      .game-preview {
+        /* Styles the game play snippet*/
+        width: 300px;
+        margin: 20px auto;
+        cursor: pointer;
+      }
+      .game-title {
+        text-decoration: underline;
+      }
+
+      img {
+        border: 2px solid white;
+      }
+      img:hover {
+        /*When you hover over the image, the border goes orange */
+        border-color: orange;
+      }
+    </style>
+    <nav class="nav-bar">
+      <ul class="nav-links">
+        <li class="logo"><a href="/home">Alien Arithmetic</a></li>
+        <li><a href="/games">Games</a></li>
+        <li><a href="/stats">Statistics</a></li>
+        <li><a href="/pfp">Profile</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <h2>Games:</h2>
+      <div class="game-list">
+        <h3 class="game-title">Alien Approach</h3>
+        <!-- Shows a snippet of the game game-play. This also acts as the button to go to the game -->
+        <img
+          src="http://localhost:3000/images/Game-preview.png"
+          alt="Game preview"
+          class="game-preview"
+          onclick="toGame()"
+        />
+        <!-- Gives a short description of how to play the game -->
+        <p class="game-description">
+          Kill the approaching aliens by calculating their self destruct code.
+          Just type the code into the input area and press enter.
+        </p>
+      </div>
+    </div>
+    <script>
+      function toGame() {
+        //Directs the user to the game menu
+        location.href = "/games/game-menu";
+      }
+    </script>
+  </body>
+</html>

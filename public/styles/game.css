@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.game-box {
+  /* This styles the area where the 
+     game will take place*/
+  border: 1px solid black;
+  width: 90vh;
+  height: 90vh;
+  margin-left: 50vw;
+  margin-top: 5vh;
+  transform: translateX(-50%);
+}
+
+input {
+  /* This styles the input area */
+  position: absolute;
+  padding: 5px;
+  left: 50%;
+  top: 8%;
+  transform: translateX(-50%);
+  max-width: 5%;
+}
+
+#main-char {
+  /* This styles the player character */
+  position: absolute;
+  left: 50%;
+  bottom: 80%;
+  transform: translateX(-50%);
+  border: 1px solid black;
+  width: 5%;
+  height: 5%;
+}
+
+.attributes {
+  /* This styles the lives and 
+    scores counters*/
+  margin: 0;
+  padding: 2.5%;
+}
+
+.enemy {
+  /* These variables represent the 
+  enemie's position relative to the game box*/
+  --x: 0;
+  --y: 0;
+
+  position: absolute;
+  /* The number in the variables are
+  transferred to percentage*/
+  left: calc(var(--x) * 1%);
+  bottom: calc(var(--y) * 1%);
+  border: 2px solid red;
+  width: 5%;
+  height: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.enemy-char {
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.question {
+  margin: 0;
+  background-color: white;
+  margin-top: 40px;
+  padding: 0;
+  width: max-content;
+  font-weight: bold;
+}
+
+.button {
+  margin-left: 2.5%;
+}
+
+p {
+  margin: 0;
+}

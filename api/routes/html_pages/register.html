@@ -1,0 +1,275 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alien Arithmetic | Sign Up</title>
+  </head>
+  <body>
+    <style>
+      /* Imports a font family form google fonts*/
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        /* sets the font family on the whole page */
+        font-family: "Josefin Sans", serif;
+      }
+      .sign-up-form {
+        /* styles the form */
+        margin: 0 auto;
+        margin-top: 10.1vh;
+        max-width: 400px;
+      }
+      .sign-up-form input {
+        /* styles the inputs int the form*/
+        display: block;
+        width: 100%;
+        margin: 5px 0;
+        padding: 5px;
+      }
+
+      #show {
+        /* styles the show check box */
+        display: inline;
+        width: 14px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .sign-up-form h2 {
+        /* styles the form title*/
+        margin-bottom: 30px;
+      }
+
+      button#sign-in {
+        /* styles the 'Sign up' button*/
+        border: 0;
+        background-color: orange;
+        padding: 8px;
+      }
+
+      button#to-login {
+        /* styles the 'Already have account?' button*/
+        background-color: white;
+        border: 0;
+        color: orange;
+      }
+
+      button:hover {
+        /* When hovering over any buttons the opacity
+        decreases*/
+        opacity: 0.75;
+      }
+
+      .landing-body {
+        /* styles the div that contains everything*/
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .title {
+        /* styles the title*/
+        margin: 0 auto;
+        text-align: center;
+        background-color: rgb(50 216 223);
+        color: white;
+        width: 100%;
+        height: 100%;
+      }
+
+      .description {
+        margin-top: 46vh;
+      }
+
+      .sign-in {
+        width: 100%;
+      }
+
+      .buttons {
+        /* styles the buttons*/
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+      }
+
+      .error {
+        /* styles the error messages*/
+        color: red;
+      }
+
+      .type {
+        margin-bottom: 20px;
+      }
+
+      .type ul {
+        display: flex;
+        align-items: center;
+      }
+      /* All the below styles the 'Student'
+      and 'Admin' buttons*/
+      li {
+        list-style-type: none;
+        width: 50%;
+        padding: 5px;
+        text-align: center;
+        cursor: pointer;
+        border: 2px solid white;
+        border-right-color: orange;
+        border-bottom-color: orange;
+      }
+      li.admin {
+        border-right-color: white;
+      }
+      li a {
+        color: black;
+        text-decoration: none;
+      }
+
+      li:hover {
+        opacity: 0.75;
+      }
+      a {
+        color: orange;
+        text-decoration: none;
+      }
+    </style>
+    <div class="landing-body">
+      <div class="title">
+        <div class="description">
+          <h1>Alien Arithmetic</h1>
+          <p>Fun games to practice basic arithemtic with aliens</p>
+          <!-- Logo and a short description -->
+        </div>
+      </div>
+      <div class="sign-in">
+        <form class="sign-up-form">
+          <!-- the form tag that contains the input fields -->
+          <h2>Make an account to play!</h2>
+          <div class="type">
+            <nav>
+              <ul>
+                <!-- Buttons to and from the admin and student register pages -->
+                <li class="student"><a href="/register/basic">Student</a></li>
+                <li class="admin"><a href="/register/admin">Admin</a></li>
+              </ul>
+            </nav>
+          </div>
+          <label for="firstName">First Name:</label><br />
+          <input type="text" id="firstName" name="firstName" />
+          <br />
+          <p class="error" id="firstnameError"></p>
+          <br />
+          <label for="lastName">Second Name:</label><br />
+          <input type="text" id="lastName" name="secondName" />
+          <br />
+          <p class="error" id="lastnameError"></p>
+          <br />
+
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" />
+
+          <br />
+          <p class="error" id="emailError"></p>
+          <br />
+          <label for="password">Password:</label><br />
+          <input type="password" id="password" name="password" />
+          <br />
+          <input type="checkbox" onclick="showPassword()" id="show" />
+          <label for="show">Show password</label>
+          <br /><br />
+          <p class="error" id="passwordError"></p>
+          <br />
+        </form>
+        <div class="buttons">
+          <!-- button to sign up -->
+          <button id="sign-in" onClick="register()">Sign Up</button>
+          <!-- button to go to the login page -->
+          <button id="to-login">
+            <a href="/login">Already have an account</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function showPassword() {
+        //Function to toggle password visability
+        const password = document.getElementById("password");
+        if (password.type === "password") {
+          password.type = "text";
+        } else {
+          password.type = "password";
+        }
+      }
+
+      function getElement(id) {
+        //Gets a inputs fields value from the DOM
+        const ele = document.getElementById(id);
+        return ele.value;
+      }
+
+      function cleanForm() {
+        //Clears all the text from the error p tags
+        const errorTags = document.querySelectorAll(".error");
+        errorTags.forEach((ele) => {
+          ele.textContent = "";
+        });
+      }
+
+      function valiadateData(data) {
+        //Takes in the validation message from the server
+        //and displays the messages in the DOM
+        const splitData = data.split(" ");
+        for (let i = 0; i < 3; i++) {
+          splitData.shift();
+        }
+        const newData = splitData.join(" ").split(", ");
+
+        const errorMsgs = newData.map((error) => {
+          error = error.split(":");
+          return [error[0], error[1]];
+        });
+
+        const element = document.getElementById(errorMsgs[0][0] + "Error");
+        element.textContent = errorMsgs[0][1];
+      }
+
+      function register() {
+        //Sends a POST request to the server in order to create a user
+        fetch("http://localhost:3000/register/basic", {
+          method: "POST",
+          body: JSON.stringify({
+            firstname: getElement("firstName"),
+            lastname: getElement("lastName"),
+            email: getElement("email"),
+            password: getElement("password"),
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            //When the data is recieved check whether it was succesful or not in creating
+            //a user
+            if (data.state) {
+              location.href = "http://localhost:3000/login";
+            } else {
+              cleanForm();
+              valiadateData(data.message);
+            }
+          })
+          //If there is a network error it is caught here
+          .catch((err) => {
+            console.log(err.message);
+          });
+      }
+    </script>
+  </body>
+</html>

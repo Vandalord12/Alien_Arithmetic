@@ -1,0 +1,295 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="http://localhost:3000/styles/styles.css" />
+    <title>Alien Arithmetic | Profile</title>
+  </head>
+  <body>
+    <style>
+      .main {
+        /* Arranges the elements on the page */
+        margin: 0 auto;
+        padding: 15vh;
+        padding-top: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      .column {
+        /* Styles the column classes */
+        width: 30%;
+      }
+      .password-block {
+        margin-top: 10%
+      }
+      .one {
+        /* Styles column one*/
+        box-shadow: 3px 5px 10px rgb(163, 163, 163);
+        padding: 15px;
+      }
+      .block {
+        /* Styles the block classes */
+        padding: 15px;
+        box-shadow: 3px 5px 10px rgb(163, 163, 163);
+      }
+      .image {
+        box-shadow: 0px 0px;
+        width: 20%;
+      }
+      .img {
+        /* Styles the image */
+        margin: 0 auto;
+        border: 5px solid orange;
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #initials {
+        /* Increases the font size of the initials */
+        font-size: 50px;
+      }
+      button {
+        /* Sets the general css for buttons*/
+        border: 0;
+        background-color: orange;
+        padding: 5px;
+      }
+      .save-blog, .change-password {
+        margin-top: 10px;
+        width: 100%
+      }
+      .log-out {
+        /* Styles the log out button */
+        margin-top: 20px;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      button:hover {
+        /* When buttons are hovered over
+        they decrease in opacity*/
+        opacity: 0.75;
+      }
+      .blog {
+        width: 100%;
+        padding: 5px;
+        margin-top: 5px;
+      }
+      h4 {
+        margin-bottom: 2.5px;
+      }
+      .password {
+        width: 100%;
+        padding: 5px
+      }
+      .error {
+        /* Styles the error message from 
+        the change password field */
+        color: red;
+      }
+    </style>
+    <nav class="nav-bar">
+      <ul class="nav-links">
+        <li class="logo"><a href="/home">Alien Arithmetic</a></li>
+        <li><a href="/games">Games</a></li>
+        <li><a href="/stats">Statistics</a></li>
+        <li><a href="/pfp">Profile</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <!-- Div that contains everything -->
+      <div class="block image">
+        <!-- Div that contains the profile picture -->
+        <div class="img">
+          <p id="initials"></p>
+        </div>
+        <!-- Button to log out -->
+          <button class="log-out" onclick="logOut()">Log Out</button>
+      </div>
+      <div class="column one">
+        <!-- This div contains the details of the user -->
+        <h2>Details</h2>
+        <br>
+        <h4 >First Name:</h4>
+        <p class="firstname detail"></p>
+        <br>
+        <h4 >Last Name:</h4>
+        <p class="lastname detail"></p>
+        <br>
+        <h4 >Email:</h4>
+        <p class="email detail"></p>
+        <br>
+        <h4>Personal Blog:</h4>
+        <textarea class="blog" cols="30" rows="10" placeholder="Write here"></textarea>
+        <p id="blogError" class="error"></p>
+        <!-- Button to save the blog to the database -->
+        <button class="save-blog" onclick="saveBlog()">Save Blog</button>
+      </div>
+      
+      <div class="column two">
+        <div class="block scores">
+          <!-- This div shows the scores of the user -->
+        <h2>Scores</h2>
+        <br>
+        <h4 >Both:</h4>
+        <p class="typeBoth detail score"></p>
+        <br>
+        <h4 >Addition and Subtraction:</h4>
+        <p class="typeAS detail score"></p>
+        <br>
+        <h4 >Multiplication and Division</h4>
+        <p class="typeMD detail score"></p>
+      </div>
+
+      <div class="block password-block">
+        <!-- This div contains the area to change the user's password -->
+        <h2>Password</h2>
+        <br>
+        <input type="password" class="password">
+        <br><br>
+        <!-- Check box to toggle password visibilty -->
+        <input type="checkbox" onclick="showPassword()" id="show">
+        <label for="show">Show password</label>
+        <br><br>
+        <p id="passwordError" class="error"></p>
+        <br>
+        <!-- Button to save the new password to the database -->
+        <button class="change-password" onclick="changePassword()">Change Password</button>
+      </div>
+      </div>
+      </div>
+    </div>
+    <script>
+      function showPassword() {
+        //Function to toggle passsword visability
+        const password = document.querySelector(".password")
+        
+        if (password.type === "password") {
+          password.type = "text"
+        } else {
+          password.type = "password"
+        }
+      }
+      
+      function logOut() {
+        //Logouts the user and take them to the login page
+        location.replace("http://localhost:3000/login/logout")
+      }
+
+      function makePFP(obj) {
+        //Makes the profile picture as the initials
+        //of the user
+        const firstInitial = obj.firstname.slice(0,1)
+        const lastInitial = obj.lastname.slice(0,1)
+        const pfp = document.getElementById("initials")
+        pfp.textContent = firstInitial + lastInitial
+      }
+
+      function sortScores(array) {
+        //Sorts an array of integer values into descending
+        //order
+        const sorted = array.sort(function (a, b) {
+        return b - a;
+        });
+        return sorted
+      }
+
+      //Sends a GET request to the server in order to display
+      //the users details on the screen
+      fetch("http://localhost:3000/pfp/info")
+      .then((res) => {
+        return res.json()
+      })
+      .then((data) => {
+        makePFP(data)
+        for (let key in data) {
+          //For each detail of the user, do the below
+          const detail = document.querySelector(`.${key}`)
+          if( key == "password" || key == "blog") {
+            //For the password and blog add it to the 
+            //display this way
+            detail.value = data[key]
+          } else {
+            //For all the other details do show it this way
+            if (key.slice(0, 4) == "type") {
+              //If the data is a score type then sort the scores 
+              //and then add it to the DOM
+              let sortedScores = sortScores(data[key])
+              detail.textContent = sortedScores
+            } else {
+             detail.textContent = data[key] 
+            }
+          }
+        }
+      })
+
+
+      function saveBlog() {
+        //Function that saves the blog text to the database
+        const blog = document.querySelector(".blog")
+        const blogText = blog.value
+        //Sends a PUT request to the server in order to save the blog
+        fetch("http://localhost:3000/pfp/save-blog", {
+          method: "PUT",
+          body: JSON.stringify({
+            blog: blogText
+          }),
+          headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        .then((res) => {
+          return res.json()
+        })
+        .then((data) => {
+          //Changes the 'Save blog' button to 'Blog Saved' after
+          //the blog is successfully saved
+          const errorMsg = document.getElementById("blogError")
+          const saveButton = document.querySelector(".save-blog")
+          if (data.state) {
+            //If the response is positive, then confirm the password
+            //change on the DOM
+            errorMsg.textContent = ""
+            saveButton.textContent = data.message
+          } else {
+            //Else, display the error message
+            errorMsg.innerText = data.message.slice(25)  
+          }
+        })
+      }
+
+      function changePassword() {
+        //Sends a PUT request to the server in order to change the password
+        const password = document.querySelector(".password")
+        fetch("http://localhost:3000/pfp/change-password", {
+          method: "PUT",
+          body: JSON.stringify({
+            password: password.value
+          }),
+          headers: {"Content-type": "application/json; charset=UTF-8"}
+        })
+        .then((res) => {
+          return res.json()
+        })
+        .then((data) => {
+          const errorMsg = document.getElementById("passwordError")
+          const changeButton = document.querySelector(".change-password")
+          if (data.state) {
+            //IF the response is positive, then confirm the password
+            //change on the DOM
+            errorMsg.textContent = ""
+            changeButton.textContent = data.message
+          } else {
+            //Else, display the error message
+            errorMsg.innerText = data.message.slice(29)  
+          }
+        })
+      }
+    
+     
+    </script>
+  </body>
+</html>
