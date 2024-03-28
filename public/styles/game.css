@@ -30,7 +30,8 @@ input {
   left: 50%;
   bottom: 80%;
   transform: translateX(-50%);
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 10%;
   width: 5%;
   height: 5%;
 }
@@ -53,18 +54,13 @@ input {
   transferred to percentage*/
   left: calc(var(--x) * 1%);
   bottom: calc(var(--y) * 1%);
-  border: 2px solid red;
+  border: 3px solid #42bc42;
+  border-radius: 50% 50% 0 0;
   width: 5%;
   height: 5%;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.enemy-char {
-  border: none;
-  width: 100%;
-  height: 100%;
 }
 
 .question {

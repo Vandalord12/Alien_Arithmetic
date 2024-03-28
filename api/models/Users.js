@@ -6,18 +6,21 @@ const userSchema = new Mongoose.Schema({
   firstname: {
     //Inside the object is where the field is validated
     type: String,
+    trim: true,
     required: [true, "First Name is required"],
     minLength: [3, "First name must be greater than 2 chars"],
     maxLength: [20, "First name must be less than 21 characters"],
   },
   lastname: {
     type: String,
+    trim: true,
     required: [true, "Last Name is required"],
     minLength: [3, "Last name must be greater than 2 chars"],
     maxLength: [20, "Last name must be less than 21 characters"],
   },
   email: {
     type: String,
+    trim: true,
     required: [true, "Email is required"],
 
     validate: {
@@ -58,12 +61,14 @@ const userSchema = new Mongoose.Schema({
   },
   password: {
     type: String,
+    trim: true,
     required: [true, "Password is required"],
     minLength: [7, "Password must be greater than 6 chars"],
-    maxLength: [20, "Passw word must be less than 21 characters"],
+    maxLength: [20, "Password must be less than 21 characters"],
   },
   blog: {
     type: String,
+    trim: true,
     maxLength: [100, "Blog must be less than 101 characters"],
   },
   role: {
