@@ -5,7 +5,7 @@ import Enemy, { lives } from "./enemies.js";
 const score = document.getElementById("score");
 const input = document.querySelector("input");
 const body = document.querySelector("body");
-let scr = 0;
+let scr = 20;
 
 //This code defaults the input area to be
 //already selected
