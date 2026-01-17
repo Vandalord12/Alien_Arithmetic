@@ -2,7 +2,7 @@
 const Mongoose = require("mongoose");
 //This is the connection url
 const dbURI =
-  "mongodb+srv://alien_arithmetic:AlienInvaders@cluster0.dt1u6xr.mongodb.net/Website_users?retryWrites=true&w=majority";
+  ""; // Input db uri here. Secret.
 
 function connectDB() {
   //Makes the connection to the database

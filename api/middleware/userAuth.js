@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 //This code is used to decipher the token
 const jwtSecret =
-  "a5b4599a273c51dc8f3806e34712579be8237939d82dc7b50237547d9b5e22b4e41532";
+  ""; // A secret DUH
 
 //This exports the function called userAuth
 exports.userAuth = (req, res, next) => {
