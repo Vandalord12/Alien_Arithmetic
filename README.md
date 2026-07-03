@@ -14,7 +14,7 @@ A game which uses games for you to practice math arithmetic
 
 ## How to use the application
 
-First of all you need a Mongo DB database URI and a JWT secret key of your own. Input them into the files `db.js`, `api/middleware/userAuth.js` and `api/routes/login.js` respectively. I have not set up any environment variables so you will need to manually open the code and put them in.
+First of all you need a Mongo DB database URI and a JWT secret key of your own. Input them into the files `db.js`, `api/middleware/userAuth.js` and `api/routes/login.js` respectively. I have not set up any environment variables so you will need to manually open the code and put them in. An admin can see every users data and can also delete them. To make an admin account find the access code in `api/routes/register.js`.
 
 In the folder there is a pdf file called `AlienArithmeticDocs` which is the report that goes with this project. In it are detailed accounts of how to use this application, the whole development process and a lot more if you are interested. To get a good synopsis of how the application works read from pages **36** to **53**.
 
