@@ -9,8 +9,8 @@ const mongoose = require("mongoose");
 //Code to allow users to become admins
 const secretCode = "ZzaR0sHoVG";
 
-function jsonResponce(res, text, code, state = true) {
-  //Sends a JSON responce to the client
+function jsonResponse(res, text, code, state = true) {
+  //Sends a JSON response to the client
   res.status(code).json({
     message: text,
     state: state,
@@ -76,7 +76,11 @@ route.post("/admin", (req, res, next) => {
               score
                 .save()
                 .then(() => {
-                  jsonResponce(res, "Successful register", 201);
+                  res.status(201).json({
+                    message : "Successful register",
+                    status: true 
+                  })
+                  //jsonResponse(res, "Successful register", 201);
                 })
                 .catch((err) => {
                   next(err);
@@ -87,22 +91,18 @@ route.post("/admin", (req, res, next) => {
             });
         } else {
           //If the email exists then do this
-          jsonResponce(
-            res,
-            "user validation failed: email: This email already exists",
-            200,
-            false
-          );
+          res.status(409).json({
+            message : "Email already exists",
+            status: false 
+          })
         }
       });
   } else {
     //If the code is incorrect do the below
-    jsonResponce(
-      res,
-      "user validation failed: code: This code is invalid",
-      200,
-      false
-    );
+    res.status(400).json({
+      message : "Invalid code",
+      status: false 
+    })
   }
 });
 
@@ -139,7 +139,7 @@ route.post("/basic", (req, res, next) => {
             score
               .save()
               .then(() => {
-                jsonResponce(res, "Successful register", 201);
+                jsonResponse(res, "Successful register", 201);
               })
               .catch((err) => {
                 next(err);
@@ -150,7 +150,7 @@ route.post("/basic", (req, res, next) => {
           });
       } else {
         //If the email exists then do this
-        jsonResponce(
+        jsonResponse(
           res,
           "user validation failed: email: This email already exists",
           200,
