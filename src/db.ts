@@ -1,13 +1,13 @@
 //Imports the mongoose package
-const Mongoose = require("mongoose");
+import Mongoose from "mongoose"
 //This is the connection url
 const dbURI : string =
-  ""; // Input db uri here. Secret.
+  "mongodb+srv://alien_arithmetic:alienarithmetic@cluster0.dt1u6xr.mongodb.net/"; // Input db uri here. Secret.
 
 function connectDB() {
   //Makes the connection to the database
   Mongoose.set("strictQuery", true);
-  Mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  Mongoose.connect(dbURI)
     .then(() => {
       //If the process is successful, run this code
       console.log("Database connected");
@@ -18,4 +18,4 @@ function connectDB() {
     });
 }
 //Exports the function to be used else where
-module.exports = connectDB();
+export {connectDB}

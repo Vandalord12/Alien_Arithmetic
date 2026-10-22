@@ -1,4 +1,4 @@
-export {}
+import {showPassword} from "./utils.js"
 
 type ProfileData = {email: string,
 firstname: string,
@@ -9,16 +9,6 @@ typeAS: string,
 typeMD: string,
 typeBoth: string}
 
-function showPassword() {
-  //Function to toggle passsword visability
-  const password = document.querySelector(".password") as HTMLInputElement
-  
-  if (password.type === "password") {
-    password.type = "text"
-  } else {
-    password.type = "password"
-  }
-}
 
 function logOut() {
   //Logouts the user and take them to the login page

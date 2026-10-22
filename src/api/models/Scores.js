@@ -1,5 +1,5 @@
 //Imports the mongoose package
-const Mongoose = require("mongoose");
+import Mongoose from "mongoose"
 //Creates a new schema
 const scoreSchema = new Mongoose.Schema({
   email: {
@@ -21,4 +21,4 @@ const scoreSchema = new Mongoose.Schema({
 //Initiates the model
 const Score = Mongoose.model("score", scoreSchema);
 //Exports the Score model
-module.exports = Score;
+export default Score;

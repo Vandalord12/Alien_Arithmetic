@@ -1,5 +1,5 @@
 //Imports the mongoose package
-const Mongoose = require("mongoose");
+import Mongoose from "mongoose"
 
 //Creates a new schema
 const userSchema = new Mongoose.Schema({
@@ -78,4 +78,4 @@ const userSchema = new Mongoose.Schema({
 //Initiates the model
 const User = Mongoose.model("user", userSchema);
 //Exports the User model
-module.exports = User;
+export default User

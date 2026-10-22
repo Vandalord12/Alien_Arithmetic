@@ -179,7 +179,7 @@
           <label for="password">Password:</label><br />
           <input type="password" id="password" name="password" />
           <br />
-          <input type="checkbox" onclick="showPassword()" id="show" />
+          <input type="checkbox" id="show" />
           <label for="show">Show password</label>
           <br /><br />
           <p class="error" id="passwordError"></p>
@@ -187,7 +187,7 @@
         </form>
         <div class="buttons">
           <!-- button to sign up -->
-          <button id="sign-in" onClick="register()">Sign Up</button>
+          <button id="sign-in">Sign Up</button>
           <!-- button to go to the login page -->
           <button id="to-login">
             <a href="/login">Already have an account</a>
@@ -195,8 +195,7 @@
         </div>
       </div>
     </div>
-    <script type = module src="http://localhost:3000/page_scripts/register.js">
-      
-    </script>
+    <script type="module" src="http://localhost:3000/page_scripts/register.js"></script>
+    <script type="module" src="http://localhost:3000/page_scripts/utils.js"></script>
   </body>
 </html>

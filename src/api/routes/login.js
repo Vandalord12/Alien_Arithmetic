@@ -1,10 +1,13 @@
 //Imports
-const express = require("express");
+import express from "express"
 const route = express.Router();
-const path = require("path");
-const jwt = require("jsonwebtoken");
-const User = require("../models/Users");
-const mongoose = require("mongoose");
+import path from 'node:path';
+import { fileURLToPath } from "node:url"
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import jwt from "jsonwebtoken"
+import User from "../models/Users.js"
+import mongoose from "mongoose"
 
 function jsonResponce(res, text, code, state = true) {
   //Sends a JSON responce to the client
@@ -54,7 +57,7 @@ route.post("/", (req, res, next) => {
             const maxAge = 1 * 60 * 60;
             //This is the code to be used to undecipher the token
             const jwtSecret =
-              ""; // Secret
+              "SomethingCoolIGuess"; // Secret
             //This defines the token
             const token = jwt.sign(
               {
@@ -91,4 +94,4 @@ route.post("/", (req, res, next) => {
   }
 });
 
-module.exports = route;
+export default route;

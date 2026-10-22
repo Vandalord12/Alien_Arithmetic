@@ -1,9 +1,12 @@
 //Imports
-const express = require("express");
+import express from "express"
 const route = express.Router();
-const path = require("path");
-const Score = require("../models/Scores");
-const { userAuth } = require("../middleware/userAuth");
+import path from 'node:path';
+import { fileURLToPath } from "node:url"
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import Score from "../models/Scores.js"
+import { userAuth } from "../middleware/userAuth.js"
 
 function jsonResponce(res, text, code, state = true) {
   //Sends a JSON responce to the client
@@ -88,4 +91,4 @@ route.post("/game-score", userAuth, (auth, req, res, next) => {
     });
 });
 
-module.exports = route;
+export default route;

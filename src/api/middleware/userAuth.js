@@ -1,12 +1,15 @@
 //Imports
-const jwt = require("jsonwebtoken");
-const path = require("path");
+import jwt from "jsonwebtoken"
+import path from 'node:path';
+import { fileURLToPath } from "node:url"
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 //This code is used to decipher the token
 const jwtSecret =
-  ""; // A secret DUH
+  "SomethingCoolIGuess"; // A secret DUH
 
 //This exports the function called userAuth
-exports.userAuth = (req, res, next) => {
+function userAuth (req, res, next) {
   //This get the token from the cookies from the request body
   const token = req.cookies.token;
   try {
@@ -20,3 +23,5 @@ exports.userAuth = (req, res, next) => {
     res.sendFile(path.join(__dirname, "../routes/html_pages/login.html"));
   }
 };
+
+export { userAuth }

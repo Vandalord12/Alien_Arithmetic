@@ -1,10 +1,13 @@
 //Imports
-const express = require("express");
+import express from "express"
 const route = express.Router();
-const path = require("path");
-const User = require("../models/Users");
-const Score = require("../models/Scores");
-const mongoose = require("mongoose");
+import path from 'node:path';
+import { fileURLToPath } from "node:url"
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import User from "../models/Users.js"
+import Score from "../models/Scores.js"
+import mongoose from "mongoose"
 
 //Code to allow users to become admins
 const secretCode = "ZzaR0sHoVG";
@@ -160,4 +163,4 @@ route.post("/basic", (req, res, next) => {
     });
 });
 
-module.exports = route;
+export default route;

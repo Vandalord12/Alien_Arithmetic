@@ -1,10 +1,13 @@
 //Imports
-const express = require("express");
+import express from "express"
 const route = express.Router();
-const path = require("path");
-const Score = require("../models/Scores");
-const User = require("../models/Users");
-const { userAuth } = require("../middleware/userAuth");
+import path from 'node:path';
+import { fileURLToPath } from "node:url"
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import Score from "../models/Scores.js"
+import User from "../models/Users.js"
+import { userAuth } from "../middleware/userAuth.js"
 
 function maxNumber(array) {
   //Finds the biggest number out of
@@ -95,4 +98,4 @@ route.delete("/:userEmail", userAuth, (auth, req, res, next) => {
   }
 });
 
-module.exports = route;
+export default route

@@ -1,25 +1,23 @@
-//Packages are imported here
-const express = require("express");
-import { error } from "console";
-import type {
-  Request,
-  Response,
-  NextFunction,
-  ErrorRequestHandler
-} from "express";
 
-const path = require("path");
+//Packages are imported here
+import express from "express";
+import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
+
 //Imports the module from db.js
-const connectDB = require("./db");
-const Mongoose = require("mongoose");
-//Package to allow cookies to be read
-const cookieParser = require("cookie-parser");
-//Imports the models
-const User = require("./api/models/Users");
-const Score = require("./api/models/Scores");
+import {connectDB}  from "./db.js"
+
+// //Package to allow cookies to be read
+import cookieParser from "cookie-parser"
+
+import path from 'node:path';
+
+import { fileURLToPath } from "node:url"
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 //Connects to the databse
-connectDB;
+connectDB();
 
 //Creates a express driven server
 const app = express();
@@ -33,7 +31,7 @@ app.listen(Port, () => {
 app.use(express.static(path.join(__dirname, "/public")));
 
 //allows for info transfer between other websites and this api
-const cors = require("cors");
+import cors from "cors"
 app.use(
   cors({
     origin: "*",
@@ -42,21 +40,22 @@ app.use(
 );
 
 //importing a helpful debug libary
-const morgan = require("morgan");
+import morgan from "morgan"
 app.use(morgan("dev"));
 
 //This converts JSON in the request body into readable JavaScript
-app.use(express.json({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //this gives me the access to the code in the routes
-const registerPage = require("./api/routes/register");
-const gamesPage = require("./api/routes/games");
-const profilePage = require("./api/routes/pfp");
-const homePage = require("./api/routes/home");
-const statsPage = require("./api/routes/stats");
-const loginPage = require("./api/routes/login");
-const adminPage = require("./api/routes/admin");
+import registerPage from "./api/routes/register.js"
+import gamesPage from "./api/routes/games.js"
+import profilePage from "./api/routes/pfp.js"
+import homePage from "./api/routes/home.js"
+import statsPage from "./api/routes/stats.js"
+import loginPage from "./api/routes/login.js"
+import adminPage from "./api/routes/admin.js"
 
 //this sends the argument "/smth" to the paticular route's file
 app.use("/register", registerPage);

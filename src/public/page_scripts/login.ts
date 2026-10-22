@@ -1,27 +1,4 @@
-export {}
-
-function showPassword() {
-  //Function to toggle passsword visability
-  const password = document.getElementById("password") as HTMLInputElement;
-  if (password.type === "password") {
-    password.type = "text";
-  } else {
-    password.type = "password";
-  }
-}
-function getElement(id : string) {
-  //Gets a inputs fields value from the DOM
-  const ele = document.getElementById(id) as HTMLInputElement;
-  return ele.value;
-}
-
-function cleanForm() {
-  //Clears all the text from the error p tags
-  const errorTags = document.querySelectorAll<HTMLParagraphElement>(".error");
-  errorTags.forEach((ele) => {
-    ele.textContent = "";
-  });
-}
+import {showPassword, getElement, cleanForm} from "./utils.js"
 
 function validateData(data : string) {
   //Takes in the validation message from the server
