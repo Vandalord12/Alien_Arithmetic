@@ -1,8 +1,7 @@
 //Imports the mongoose package
 import Mongoose from "mongoose"
 //This is the connection url
-const dbURI : string =
-  "mongodb+srv://alien_arithmetic:alienarithmetic@cluster0.dt1u6xr.mongodb.net/"; // Input db uri here. Secret.
+const dbURI : string = process.env.DB_URI as string; // Input db uri here. Secret.
 
 function connectDB() {
   //Makes the connection to the database

@@ -11,8 +11,8 @@
     "build:ts": "tsc",
     "copy:static": "copyfiles -u 1 \"src/**/*.html\" \"src/**/*.css\" \"src/**/*.png\" \"src/**/*.jpg\" \"src/**/*.jpeg\" \"src/**/*.svg\" \"src/**/*.webp\" \"src/**/*.ico\" \"src/**/*.json\" dist",
     "build": "npm run clean && npm run build:ts && npm run copy:static",
-    "start": "node dist/server.js",
-    "dev": "nodemon dist/server.js"
+    "start": "node --env-file=.env dist/server.js",
+    "dev": "nodemon --env-file=.env dist/server.js"
   },
   "author": "Muhammed Bachelani",
   "license": "ISC",
